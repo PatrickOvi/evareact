@@ -40,16 +40,6 @@ export const Pagina1 = ()=>{
             <Button variant='primary' type='button' onClick={handleRegistrar}>Registrar</Button>
         </Form>
 
-
-
-
-
-
-        <form>
-            <input type='text' id='nombre' name='nombre'/>
-            <input type='text' id='apellido' name='apellido'/>
-            <button>Registrar</button>
-        </form>
         </>
     )
 }

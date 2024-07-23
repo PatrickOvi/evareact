@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { Button } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
 
@@ -16,9 +16,11 @@ export default function Home() {
           <Form.Group className="mb-3" controlId="formBasicApellido">
                 <Form.Control type='text' placeholder='Contraseña' />
           </Form.Group>
-            <Button variant='primary' type='button' href="/Pagina2">Ingresar</Button>
-            <Link href='/Pagina1'>Crear Usuario</Link>
+          <Button variant="primary" size="lg" disabled><Link href="/Pagina2">Ingresar</Link></Button>
       </Form>
+      
     </div>
   );
 }
+
+
