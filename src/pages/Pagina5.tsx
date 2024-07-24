@@ -1,9 +1,10 @@
 
-import { actualizarTrabajador, obtenerTrabajador } from '@/Firebase/Promesas'
+import { actualizarTrabajador, eliminarTrabajador, obtenerTrabajador } from '@/Firebase/Promesas'
 import { Trabajador } from '@/Interfaces/ITrabajador'
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, Modal } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const initialState:Trabajador = {
     nombre:"",
@@ -12,6 +13,8 @@ const initialState:Trabajador = {
     seccion:"",
     correo:"",
     fechaIngreso:"",
+    telefono:0,
+    sexo:""
 }
 
 export const Pagina5 = () => {
@@ -39,11 +42,14 @@ export const Pagina5 = () => {
 
     },[])
 
+
     const modificar = ()=>{
         actualizarTrabajador(trabajador).then(()=>{
             alert("Se actualiza con exito")
         })
     }
+
+
   return (
     <>
         <Form>
@@ -92,6 +98,14 @@ export const Pagina5 = () => {
             <Form.Control type='date' placeholder='Ingrese la fecha que ingreso a trabajar: ' 
             value={trabajador.fechaIngreso}
             name="fechaIngreso"
+            onChange={(e)=>{handleTrabajador(e.currentTarget.name,e.currentTarget.value)}} />
+            <Form.Text></Form.Text>
+        </Form.Group>
+        <Form.Group>
+            <Form.Label>Numero telefonico</Form.Label>
+            <Form.Control type='number' placeholder='Ingrese su numero telefonico: ' 
+            value={trabajador.telefono}
+            name="telefono"
             onChange={(e)=>{handleTrabajador(e.currentTarget.name,e.currentTarget.value)}} />
             <Form.Text></Form.Text>
         </Form.Group>

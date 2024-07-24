@@ -1,8 +1,8 @@
 import React,{useState} from 'react'
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 import { Trabajador } from '@/Interfaces/ITrabajador'
 import { registrarTrabajador } from '@/Firebase/Promesas'
+import { Button, Form } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -13,6 +13,8 @@ const initialState:Trabajador = {
     seccion:" ",
     correo:" ",
     fechaIngreso:" ",
+    telefono:0,
+    sexo:"",
 }
 
 export const Pagina3 = ()=>{
@@ -33,8 +35,7 @@ export const Pagina3 = ()=>{
 
   return (
     <>
-    {/* nombre,apellido,rut,seccion,correo.fechaIngreso*/}
-
+    <Button as="input" type="reset" value="Reset" href='Pagina2.tsx'/>
     <Form>
         <Form.Group>
             <Form.Label>Nombre</Form.Label>
@@ -77,6 +78,24 @@ export const Pagina3 = ()=>{
             name="fechaIngreso"
             onChange={(e)=>{handleTrabajador(e.currentTarget.name,e.currentTarget.value)}} />
             <Form.Text></Form.Text>
+        </Form.Group>
+        <Form.Group>
+            <Form.Label>Telefono</Form.Label>
+            <Form.Control type='text' placeholder='Ingrese su numero telefonico: ' 
+            name="telefono"
+            onChange={(e)=>{handleTrabajador(e.currentTarget.name,e.currentTarget.value)}} />
+            <Form.Text></Form.Text>
+        </Form.Group>
+        <Form.Group className="mb-3">
+            <Form.Check type="checkbox" label="Hombre" 
+            name="sexo" 
+            onChange={(e)=>{handleTrabajador(e.currentTarget.name,e.currentTarget.value)}}/>
+            <Form.Check type="checkbox" label="Mujer" 
+            name="sexo" 
+            onChange={(e)=>{handleTrabajador(e.currentTarget.name,e.currentTarget.value)}}/>
+            <Form.Check type="checkbox" label="Otro" 
+            name="sexo" 
+            onChange={(e)=>{handleTrabajador(e.currentTarget.name,e.currentTarget.value)}}/>
         </Form.Group>
         <Button type='button' variant='success'
             onClick={registrar}>Registrar</Button>

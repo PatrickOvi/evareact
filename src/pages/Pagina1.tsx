@@ -1,44 +1,50 @@
 import React, { useState } from 'react'
 import Form  from 'react-bootstrap/Form'
-
-
 import { Button } from 'react-bootstrap';
+import { Usuario } from '@/Interfaces/IUsuario';
+import { registrarUsuario } from '@/Firebase/Promesas';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const initialState:Usuario = {
+    usuario:" ",
+    contraseña:" "
+}
 
 export const Pagina1 = ()=>{
-    const [nombre, setNombre] = useState("Joselito")
-    const [apellido, setApellido] = useState("Joselito")
-    const [errorNombre, setErrorNombre] = useState("Joselito")
+    const [Usuario, setUsuario] = useState<Usuario>(initialState)
 
-    const validarNombre = (valor:string)=>{
-        if(valor.length>4){
-            setErrorNombre("");
-        }else{
-            setErrorNombre("Debes ingresar 4 caracteres como minimo")
-        }
-        setNombre(valor);
-
+    const handleUsuario=(name:string,value:string)=>{
+        setUsuario({...Usuario,[name]:value})
+    }
+    const registrarU = ()=>{
+        registrarUsuario(Usuario).then(()=>{
+            alert("se registro")
+        }).catch((e)=>{
+            console.log(e);
+            alert("algo a pasao")
+        })
     }
 
-    const handleRegistrar = ()=>{
-        console.log("Se registro con exito");
-        alert("Listo!"+nombre+" "+apellido);
-    }
     
     
-    return(
-        <>
-        <h1>Crear Usuario</h1>
-        <Form>
-            <Form.Group className="mb-3" controlId="formBasicNombre">
-                <Form.Label>Nombre</Form.Label>
-                <Form.Control type='text' placeholder='ingrese un nombre' onChange={(e)=>validarNombre(e.currentTarget.value)}/>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicApellido">
-                <Form.Label>Apellido</Form.Label>
-                <Form.Control type='text' placeholder='ingrese un apellido' onChange={(e)=>setApellido(e.currentTarget.value)}/>
-            </Form.Group>
-            <Button variant='primary' type='button' onClick={handleRegistrar}>Registrar</Button>
-        </Form>
+  return(
+    <>
+    <h1>Crear Usuario</h1>
+    <Form>
+        <Form.Group className="mb-3" controlId="formBasicNombre">
+            <Form.Label>Usuario</Form.Label>
+            <Form.Control type='text' placeholder='ingrese un nombre de usuario'
+            name="usuario"
+            onChange={(e)=>{handleUsuario(e.currentTarget.name,e.currentTarget.value)}} />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicApellido">
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control type='password' placeholder='ingrese una contraseña' 
+            name="usuario"
+            onChange={(e)=>{handleUsuario(e.currentTarget.name,e.currentTarget.value)}}/>
+        </Form.Group>
+        <Button variant='primary' type='button' onClick={registrarU}>Registrar</Button>
+    </Form>
 
         </>
     )

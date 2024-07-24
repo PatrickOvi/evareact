@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "./Firebase";
 import { Trabajador } from "@/Interfaces/ITrabajador";
 import { Usuario } from "@/Interfaces/IUsuario";
@@ -19,6 +19,8 @@ export const obtenerTrabajadores = async()=>{
             fechaIngreso:doc.data().fechaIngreso,
             nombre:doc.data().nombre,
             seccion:doc.data().seccion,
+            telefono:doc.data().telefono,
+            sexo:doc.data().sexo,
             key:doc.id
         }
         trabajadores.push(trabajador)
@@ -37,6 +39,8 @@ export const obtenerTrabajador = async(key:string)=>{
             fechaIngreso:docSnap.data().fechaIngreso,
             nombre:docSnap.data().nombre,
             seccion:docSnap.data().seccion,
+            telefono:docSnap.data().telefono,
+            sexo:docSnap.data().sexo,
             key:docSnap.id
         }
         return trabajador
@@ -53,4 +57,9 @@ export const actualizarTrabajador = async(p:Trabajador)=>{
 
 export const registrarUsuario = async(usuario:Usuario)=>{
     const docRef = await addDoc(collection(db,"usuarios"),usuario);
+}
+
+export const eliminarTrabajador = async(p:Trabajador)=>{
+    const ref = doc(collection(db,"trabajadores",p.key!))
+    await deleteDoc(ref);
 }

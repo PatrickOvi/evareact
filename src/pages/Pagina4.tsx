@@ -1,9 +1,13 @@
 
-import { obtenerTrabajadores } from "@/Firebase/Promesas"
+import { eliminarTrabajador, obtenerTrabajadores } from "@/Firebase/Promesas"
 import { Trabajador } from "@/Interfaces/ITrabajador"
 import Link from "next/link"
-import React, { useEffect, useState } from "react"
-import { Button, Table } from "react-bootstrap"
+import { useEffect, useState } from "react"
+import { Button, Modal, Table } from "react-bootstrap"
+import { FaTrashAlt } from "react-icons/fa"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { useRouter } from "next/router"
+
 
 
 export const Pagina4 = ()=>{
@@ -21,6 +25,8 @@ export const Pagina4 = ()=>{
 
     },[])
 
+
+
     return (
         <>
             <Table>
@@ -32,6 +38,8 @@ export const Pagina4 = ()=>{
                         <th>Seccion</th>
                         <th>Correo</th>
                         <th>Fecha de Ingreso</th>
+                        <th>Telefono</th>
+                        <th>Sexo</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,11 +53,13 @@ export const Pagina4 = ()=>{
                                     <td>{p.seccion}</td>
                                     <td>{p.correo}</td>
                                     <td>{p.fechaIngreso}</td>
+                                    <td>{p.telefono}</td>
+                                    <td>{p.sexo}</td>
                                     <td>
                                         <Link href={{pathname:'Pagina5',query:{key:p.key}}}>
                                         <Button variant='warning'>Actualizar</Button>
                                         </Link>
-                                        <Button variant='danger'>Eliminar</Button>
+                                        <Button variant='danger'><FaTrashAlt /></Button>
                                     </td>
                                 </tr>
                             )

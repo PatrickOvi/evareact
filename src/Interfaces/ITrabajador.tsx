@@ -5,5 +5,7 @@ export interface Trabajador{
     seccion:string,
     correo:string,
     fechaIngreso:string,
+    telefono:number,
+    sexo:string,
     key?:string
 }
